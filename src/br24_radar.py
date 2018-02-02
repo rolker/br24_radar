@@ -51,7 +51,7 @@ def radar_listener():
             #print angle, scale_m, values[0:30], scale_m*30/512.0
             scanline = RadarScanline()
             scanline.angle = angle
-            scanline.range = scale_m
+            scanline.range = scale
             scanline.intensities = data[cursor+24:cursor+24+512]
             sector.scanlines.append(scanline)
         pub.publish(sector)
