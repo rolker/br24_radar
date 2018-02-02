@@ -2,7 +2,9 @@
 
 import socket
 import struct
+import datetime
 import rospy
+import rosbag
 from marine_msgs.msg import RadarSector
 from marine_msgs.msg import RadarScanline
 
@@ -29,8 +31,14 @@ def radar_listener():
     mreq = struct.pack('4sL', group, socket.INADDR_ANY)
     sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
 
+    timestamp = datetime.datetime.utcfromtimestamp(rospy.Time.now().to_time()).isoformat()
+    bag = rosbag.Bag('nodes/br24_radar_'+('-'.join(timestamp.split(':')))+'.bag', 'w')
+
     while not rospy.is_shutdown():
-        data, address = sock.recvfrom(100000)
+        try:
+            data, address = sock.recvfrom(100000)
+        except socket.error:
+            break
 
         #print('received {} bytes from {}'.format(len(data), address))
         #print(data)
@@ -55,7 +63,8 @@ def radar_listener():
             scanline.intensities = data[cursor+24:cursor+24+512]
             sector.scanlines.append(scanline)
         pub.publish(sector)
-        
+        bag.write('/radar',sector)
+    bag.close()
 
 if __name__ == '__main__':
     try:

@@ -10,6 +10,7 @@ project(br24_radar)
 find_package(catkin REQUIRED COMPONENTS
   marine_msgs
   rospy
+  rosbag
 )
 
 ## System dependencies are found with CMake's conventions
