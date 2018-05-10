@@ -13,8 +13,8 @@ def radar_listener():
     rospy.init_node('br24_radar')
     
     radar = br24_radar.br24_radar.Radar()
-    radar.turnOn()
-    radar.setRange(2500)
+    #radar.turnOn()
+    #radar.setRange(2500)
 
     timestamp = datetime.datetime.utcfromtimestamp(rospy.Time.now().to_time()).isoformat()
     bag = rosbag.Bag('nodes/br24_radar_'+('-'.join(timestamp.split(':')))+'.bag', 'w')
