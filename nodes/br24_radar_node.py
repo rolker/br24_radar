@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import rospy
-import rosbag
 from marine_msgs.msg import RadarSectorStamped
 from marine_msgs.msg import RadarScanline
 import br24_radar.br24_radar
@@ -17,7 +16,6 @@ def radar_listener():
     #radar.setRange(2500)
 
     timestamp = datetime.datetime.utcfromtimestamp(rospy.Time.now().to_time()).isoformat()
-    bag = rosbag.Bag('nodes/br24_radar_'+('-'.join(timestamp.split(':')))+'.bag', 'w', rosbag.Compression.BZ2)
 
     while not rospy.is_shutdown():
         try:
@@ -38,8 +36,6 @@ def radar_listener():
                 scanline.intensities = sl['intensities']
                 sector.sector.scanlines.append(scanline)
             pub.publish(sector)
-            bag.write('/radar',sector)
-    bag.close()
 
 if __name__ == '__main__':
     try:
