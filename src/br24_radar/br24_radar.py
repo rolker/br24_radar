@@ -85,7 +85,12 @@ class Radar:
                         scanline['range'] = large_range*64
                     
                 scanline['angle'] = angle*360.0/4096
-                scanline['intensities'] = data[cursor+24:cursor+24+512]
+                scanline['intensities'] = []
+                for d in data[cursor+24:cursor+24+scanline_size]:
+                    low = ord(d)&0x0f;
+                    high = (ord(d)&0xf0)>>4;
+                    scanline['intensities'].append(low)
+                    scanline['intensities'].append(high)
                 sector['scanlines'].append(scanline)
         return sector
 
