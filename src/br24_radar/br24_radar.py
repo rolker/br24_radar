@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+from __future__ import division
+from __future__ import print_function
+from builtins import range
+from builtins import object
+from past.utils import old_div
 import socket
 import struct
 import datetime
@@ -11,7 +16,7 @@ import datetime
 #
 # see also: https://github.com/keesverruijt/BR24radar_pi/blob/master/src/br24Receive.cpp
 
-class Radar:
+class Radar(object):
     def __init__(self):
         image_multicast_group = '236.6.7.8'
         image_server_address = ('', 6678)
@@ -80,7 +85,7 @@ class Radar:
                         if small_range == -1:
                             scanline['range'] = 0
                         else:
-                            scanline['range'] = small_range/4
+                            scanline['range'] = old_div(small_range,4)
                     else:
                         scanline['range'] = large_range*64
                     
@@ -134,8 +139,8 @@ if __name__ == '__main__':
         sector = r.getData()
         if sector is not None:
             for s in sector['scanlines']:
-                print s,
+                print(s, end=' ')
                 break
-            print
+            print()
         else:
-            print sector
+            print(sector)
