@@ -31,9 +31,9 @@ for i in ranges:
     for j in range(5):
         sector = r.getData()
     if sector is None:
-        print None
+        print (None)
     else:
         sl = sector['scanlines'][0]
-        print ','.join((str(i),str(sl['range'])))
+        print (','.join((str(i),str(sl['range']))))
         out.write(','.join((str(i),str(sl['range']))))
         out.write('\n')
