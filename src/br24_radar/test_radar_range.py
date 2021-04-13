@@ -3,6 +3,7 @@
 import br24_radar
 
 r = br24_radar.Radar()
+r.turnOn()
 
 out = open('ranges.csv','w')
 
@@ -25,7 +26,7 @@ for i in range(1500,25000,25):
 
 
 for i in ranges:
-    #print i
+    print (i)
     r.setRange(i)
     sector = None
     for j in range(5):
