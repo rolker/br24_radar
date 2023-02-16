@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 import rospy
-from marine_msgs.msg import RadarSectorStamped
-from marine_msgs.msg import RadarScanline
+from project11_msgs.msg import RadarSectorStamped
+from project11_msgs.msg import RadarScanline
 import br24_radar.br24_radar
 
 

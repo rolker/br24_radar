@@ -8,7 +8,7 @@ project(br24_radar)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  marine_msgs
+  project11_msgs
   rospy
   rosbag
 )
@@ -70,7 +70,7 @@ catkin_python_setup()
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   marine_msgs
+#   project11_msgs
 # )
 
 ################################################
@@ -105,7 +105,7 @@ catkin_python_setup()
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES br24_radar
-#  CATKIN_DEPENDS marine_msgs rospy
+#  CATKIN_DEPENDS project11_msgs rospy
 #  DEPENDS system_lib
 )
 
